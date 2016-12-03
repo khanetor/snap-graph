@@ -23,16 +23,24 @@ for n in G1_LSCC.Nodes():
             distance_counter[shortest_distances[i]] = 1
 
 total_distance = 0
-total_path = 0
+total_distance_count = 0
 for i in distance_counter:
     total_distance += i * distance_counter[i]
-    total_path += distance_counter[i]
+    total_distance_count += distance_counter[i]
 
 # Mean
-mean = total_distance / total_path
+mean = total_distance / total_distance_count
 print 'Mean: %f' % mean
 
+i = 0
+half = 0
+while half <= total_distance_count / 2:
+    half += distance_counter[distance_counter.GetKey(i)]
+    i += 1
+
 # Median
+median = distance_counter.GetKey(i - 1)
+print 'Median: %d' % median
 
 # Diameter
 diameter = distance_counter.GetKey(distance_counter.Len() - 1)
