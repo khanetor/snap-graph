@@ -35,16 +35,28 @@ for i in distance_counter:
 mean = total_distance / total_distance_count
 print 'Mean: %f' % mean
 
+# Median
 i = -1
 half = 0
-while half <= total_distance_count / 2:
+half_total_distance_count = total_distance_count / 2
+while half <= half_total_distance_count:
     i += 1
     half += distance_counter[distance_counter.GetKey(i)]
 
-# Median
 median = distance_counter.GetKey(i)
 print 'Median: %d' % median
 
 # Diameter
 diameter = distance_counter.GetKey(distance_counter.Len() - 1)
 print 'Diameter: %d' % diameter
+
+# Eff Diameter
+i = -1
+eff_quantile = 0
+eff_quantile_distance_count = total_distance_count * 0.9
+while eff_quantile <= eff_quantile_distance_count:
+    i += 1
+    eff_quantile += distance_counter[distance_counter.GetKey(i)]
+
+eff_diameter = distance_counter.GetKey(i)
+print 'Effective diameter: %d' % eff_diameter
