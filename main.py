@@ -14,10 +14,13 @@ distance_counter = snap.TIntH()
 for n in G1_LSCC.Nodes():
     n_id = n.GetId()
     shortest_distances = snap.TIntH()
-    snap.GetShortPath(G1, n_id, shortest_distances, directed)
+    snap.GetShortPath(G1_LSCC, n_id, shortest_distances, directed)
 
     for i in shortest_distances:
-        if shortest_distances[i] > 0 and distance_counter.IsKey(shortest_distances[i]):
+        if shortest_distances[i] <= 0:
+            continue
+
+        if distance_counter.IsKey(shortest_distances[i]):
             distance_counter[shortest_distances[i]] += 1
         else:
             distance_counter[shortest_distances[i]] = 1
@@ -32,14 +35,14 @@ for i in distance_counter:
 mean = total_distance / total_distance_count
 print 'Mean: %f' % mean
 
-i = 0
+i = -1
 half = 0
 while half <= total_distance_count / 2:
-    half += distance_counter[distance_counter.GetKey(i)]
     i += 1
+    half += distance_counter[distance_counter.GetKey(i)]
 
 # Median
-median = distance_counter.GetKey(i - 1)
+median = distance_counter.GetKey(i)
 print 'Median: %d' % median
 
 # Diameter
