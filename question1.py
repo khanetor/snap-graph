@@ -2,23 +2,26 @@ from __future__ import division
 import snap
 
 
-def statistics_directed(graph):
-    if not isinstance(graph, snap.PNGraph):
+def statistics(graph):
+    if isinstance(graph, snap.PNGraph):
+        is_directed = True
+        lcc = snap.GetMxScc(graph)
+    elif isinstance(graph, snap.PUNGraph):
+        is_directed = False
+        lcc = snap.GetMxWcc(graph)
+    else:
         raise NotAGraphError(graph)
 
-    is_directed = True
-    lscc = snap.GetMxScc(graph)
-
-    nodes = lscc.GetNodes()
-    edges = lscc.GetEdges()
+    nodes = lcc.GetNodes()
+    edges = lcc.GetEdges()
 
     # Find mean, median, diameter, effective diameter
     distance_counter = snap.TIntH()
 
-    for n in lscc.Nodes():
+    for n in lcc.Nodes():
         n_id = n.GetId()
         shortest_distances = snap.TIntH()
-        snap.GetShortPath(lscc, n_id, shortest_distances, is_directed)
+        snap.GetShortPath(lcc, n_id, shortest_distances, is_directed)
 
         for i in shortest_distances:
             if shortest_distances[i] <= 0:
