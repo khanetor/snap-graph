@@ -23,7 +23,8 @@ def load_graph(filename, prefix, directed=True):
 
 # convert the graph from directed into undirected
 def convert_undirected(G1):
-    pass
+    G2 = snap.ConvertGraph(snap.PUNGraph, G1)
+    return G2
 
 
 # save the result to file
