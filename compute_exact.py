@@ -6,8 +6,8 @@ Created on Sun Dec  4 12:23:40 2016
 """
 
 from utils import load_graph, convert_undirected, save_statistics
-from stats import get_stats
 import os
+from question1 import statistics
 # %% prepare the data
 data = [
     'wiki-Vote.txt', 'soc-Epinions1.txt','gplus_combined.txt', 
@@ -21,7 +21,7 @@ for filename in data:
     print 'processing '+filename+'...'
     # compute directed version
     G = load_graph(filename, prefix, directed=True)
-    mean, median, diameter, eff_diameter = get_stats(G, directed=True)
+    nodes, edges, mean, median, diameter, eff_diameter = statistics(G)
     # save the data
     filen, fileext = os.path.splitext(filename)
     res_filename = filen+'-directed'+fileext
@@ -29,6 +29,6 @@ for filename in data:
     print 'computing exact stats for '+filename+' (directed) completes!'
     # compute undirected version
     G_u = convert_undirected(G)
-    (mean_u, median_u, diameter_u, eff_diameter_u) = get_stats(G_u, directed=False)
+    nodes_u, edges_u, mean_u, median_u, diameter_u, eff_diameter_u= statistics(G_u)
     res_filename = filen+'-undirected'+fileext
     save_statistics(res_filename, res_prefix, mean_u, median_u, diameter_u, eff_diameter_u)
