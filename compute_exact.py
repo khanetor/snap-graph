@@ -48,8 +48,8 @@ for filename in data:
     G_u = convert_undirected(G)
     
     time0 = time.clock()
-    nodes_u, edges_u, mean_u, median_u, diameter_u, eff_diameter_u= statistics(G_u)
-    comp_time = time.clock - time0
+    nodes_u, edges_u, mean_u, median_u, diameter_u, eff_diameter_u = statistics(G_u)
+    comp_time = time.clock() - time0
     # save the results
     res_filename = filen+'-undirected'+fileext
     save_statistics(res_filename, results_dir, mean_u, median_u, diameter_u, eff_diameter_u, comp_time)
