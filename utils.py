@@ -28,7 +28,7 @@ def convert_undirected(G1):
 
 
 # save the result to file
-def save_statistics(filename, prefix, med_dist, mean_dist, diam, eff_diam):
+def save_statistics(filename, prefix, med_dist, mean_dist, diam, eff_diam, comp_time):
     # get the path to the file
     filepath = os.path.join(prefix, filename)
     filen, fileext = os.path.splitext(filepath)
@@ -36,4 +36,4 @@ def save_statistics(filename, prefix, med_dist, mean_dist, diam, eff_diam):
     if not os.path.exists(prefix):
         os.makedirs(prefix)
     with open(filepath, 'w') as f:
-        f.write('{} {} {} {}'.format(med_dist, mean_dist, diam, eff_diam))
+        f.write('{} {} {} {} {}'.format(med_dist, mean_dist, diam, eff_diam, comp_time))
