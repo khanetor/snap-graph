@@ -44,5 +44,15 @@ def get_stats(G, directed=True):
     # Diameter
     diameter = distance_counter.GetKey(distance_counter.Len() - 1)
     
-    return (mean, median, diameter)
+    # Eff Diameter
+    i = -1
+    eff_quantile = 0
+    eff_quantile_distance_count = total_distance_count * 0.9
+    while eff_quantile <= eff_quantile_distance_count:
+        i += 1
+        eff_quantile += distance_counter[distance_counter.GetKey(i)]
+
+    eff_diameter = distance_counter.GetKey(i)
+    
+    return mean, median, diameter, eff_diameter
     

@@ -21,14 +21,14 @@ for filename in data:
     print 'processing '+filename+'...'
     # compute directed version
     G = load_graph(filename, prefix, directed=True)
-    (mean, median, diameter) = get_stats(G, directed=True)
+    mean, median, diameter, eff_diameter = get_stats(G, directed=True)
     # save the data
     filen, fileext = os.path.splitext(filename)
     res_filename = filen+'-directed'+fileext
-    save_statistics(res_filename, res_prefix, mean, median, diameter, 0)
+    save_statistics(res_filename, res_prefix, mean, median, diameter, eff_diameter)
     print 'computing exact stats for '+filename+' (directed) completes!'
     # compute undirected version
     G_u = convert_undirected(G)
-    (mean_u, median_u, diameter_u) = get_stats(G_u, directed=False)
+    (mean_u, median_u, diameter_u, eff_diameter_u) = get_stats(G_u, directed=False)
     res_filename = filen+'-undirected'+fileext
-    save_statistics(res_filename, res_prefix, mean_u, median_u, diameter_u, 0)
+    save_statistics(res_filename, res_prefix, mean_u, median_u, diameter_u, eff_diameter_u)
