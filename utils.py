@@ -28,5 +28,10 @@ def convert_undirected(G1):
 
 
 # save the result to file
-def save_statistics(filename, med_dist, mean_dist, diam, eff_diam):
-    pass
+def save_statistics(filename, prefix, med_dist, mean_dist, diam, eff_diam):
+    # get the path to the file
+    filepath = path.join(prefix, filename)
+    filen, fileext = path.splitext(filepath)
+    assert fileext=='.txt'
+    with open(filepath, 'w') as f:
+        f.write('{} {} {} {}'.format(med_dist, mean_dist, diam, eff_diam))
