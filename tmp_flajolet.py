@@ -62,17 +62,15 @@ nodes_n = lcc.GetNodes()
 edges_n = lcc.GetEdges()
 
 k = 64
-r = 3
+r = 0
 d = int(np.ceil(np.log2(nodes_n)))+r
 h_max = 20
 # initialize the bitmasks for all nodes
 Mcur = initialize_bitmasks(nodes_n, k, d)
 # distance count
 dist_count = np.zeros((h_max+1, 1))
-dist_count[0] = nodes_n
 for h in range(1, h_max+1):
-    tmp = []
-    Mlast = Mcur
+    Mlast = np.copy(Mcur)
     # update binary bitmasks
     for e in lcc.Edges():
         src_node = e.GetSrcNId()
@@ -83,10 +81,9 @@ for h in range(1, h_max+1):
     for node in lcc.Nodes():
         i = node.GetId()
         b = get_avg_pos(Mcur[i], d)
-        tmp.append(b)
-        acc += np.power(2.0, b)/.77351
-        
+        acc += np.power(2.0, b)/.77351     
     dist_count[h] = acc
+
 real_count = np.zeros((h_max+1, 1))
 for i in range(1, h_max+1):
     real_count[i] = dist_count[i] - dist_count[i-1]
