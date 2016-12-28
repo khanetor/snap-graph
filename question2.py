@@ -1,10 +1,15 @@
 from __future__ import division
 import snap
-from exception import NotAGraphError
+from exception import NotAGraphError, NotValidParameter
+from random import randint
 
 
-def statistics(graph):
-    if isinstance(graph, snap.PNGraph):
+# Sample random pairs
+
+def statistics(graph, p):
+    if not 1 <= p <= 100:
+        raise NotValidParameter('n should be between 1 and 100')
+    elif isinstance(graph, snap.PNGraph):
         is_directed = True
         lcc = snap.GetMxScc(graph)
     elif isinstance(graph, snap.PUNGraph):
@@ -18,20 +23,26 @@ def statistics(graph):
 
     # Find mean, median, diameter, effective diameter
     distance_counter = snap.TIntH()
+    cc = 0
 
     for n in lcc.Nodes():
-        n_id = n.GetId()
-        shortest_distances = snap.TIntH()
-        snap.GetShortPath(lcc, n_id, shortest_distances, is_directed)
-
-        for i in shortest_distances:
-            if shortest_distances[i] <= 0:
+        for m in lcc.Nodes():
+            if randint(0, 100) > p:  # a pair of nodes have p percent chance to be chosen
                 continue
-
-            if distance_counter.IsKey(shortest_distances[i]):
-                distance_counter[shortest_distances[i]] += 1
             else:
-                distance_counter[shortest_distances[i]] = 1
+                cc += 1
+                print '%d / %d' % (cc, nodes**2)
+                n_id = n.GetId()
+                m_id = m.GetId()
+                length = snap.GetShortPath(lcc, n_id, m_id, is_directed)
+
+                if length <= 0:
+                    continue
+                else:
+                    if distance_counter.IsKey(length):
+                        distance_counter[length] += 1
+                    else:
+                        distance_counter[length] = 1
 
     total_distance = 0
     total_distance_count = 0
