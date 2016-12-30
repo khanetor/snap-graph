@@ -3,7 +3,7 @@ import snap
 from exception import NotAGraphError
 
 
-def statistics(lcc):
+def get_exact_statistics(lcc):
     if isinstance(lcc, snap.PNGraph):
         is_directed = True
     elif isinstance(lcc, snap.PUNGraph):
