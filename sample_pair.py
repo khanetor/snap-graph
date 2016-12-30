@@ -6,17 +6,15 @@ from random import randint
 
 # Sample random pairs
 
-def statistics(graph, p):
+def get_sample_pair_statistics(lcc, p):
     if not 1 <= p <= 100:
         raise NotValidParameter('n should be between 1 and 100')
-    elif isinstance(graph, snap.PNGraph):
+    elif isinstance(lcc, snap.PNGraph):
         is_directed = True
-        lcc = snap.GetMxScc(graph)
-    elif isinstance(graph, snap.PUNGraph):
+    elif isinstance(lcc, snap.PUNGraph):
         is_directed = False
-        lcc = snap.GetMxWcc(graph)
     else:
-        raise NotAGraphError(graph)
+        raise NotAGraphError(lcc)
 
     nodes = lcc.GetNodes()
     edges = lcc.GetEdges()
