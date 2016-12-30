@@ -10,6 +10,7 @@ import os
 import argparse
 from question1 import statistics
 from anf import get_anf_statistics
+from sample_source import get_sample_source_statistics
 import time
 
 
@@ -77,7 +78,7 @@ for filename in data:
     print 'processing '+filename+'...'
     
     # compute directed version
-    print 'directed" '+type_suffix
+    print 'graph type: '+type_suffix
     print 'load the graph in '+filename+'...'
     G = load_graph(filename, data_dir, is_directed)
     
@@ -90,6 +91,8 @@ for filename in data:
     time0 = time.clock()
     if method == 0: # exact statistics
         nodes, edges, mean, median, diameter, eff_diameter = statistics(lcc)
+    elif method == 2: # sample source
+        nodes, edges, mean, median, diameter, eff_diameter = get_sample_source_statistics(lcc,pct=p)
     elif method == 3: # anf algorithm
         nodes, edges, mean, median, diameter, eff_diameter = get_anf_statistics(lcc,k=k,r=r)
     comp_time = time.clock()-time0
