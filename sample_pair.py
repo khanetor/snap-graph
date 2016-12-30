@@ -29,7 +29,7 @@ def get_sample_pair_statistics(lcc, p):
                 continue
             else:
                 cc += 1
-                print '%d / %d' % (cc, nodes**2)
+                # print '%d / %d' % (cc, nodes**2)
                 n_id = n.GetId()
                 m_id = m.GetId()
                 length = snap.GetShortPath(lcc, n_id, m_id, is_directed)
