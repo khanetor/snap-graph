@@ -96,18 +96,7 @@ def get_statistics(distance_counter):
     return mean, median, diameter, eff_diameter
 
 # %% main method to compute the approximate statistics using ANF algorithm
-def get_anf_statistics(graph, k=32, r=0, h_max=20):
-    if isinstance(graph, snap.PNGraph):
-        # get the largest strongly connected component
-        lcc = snap.GetMxScc(graph)
-        # renumber the node numbers from 0 to the size-1
-        lcc = snap.ConvertGraph(snap.PNGraph, lcc, True)
-    elif isinstance(graph, snap.PUNGraph):
-        # get the largest strongly connected component
-        lcc = snap.GetMxWcc(graph)
-        # renumber the node numbers from 0 to the size-1
-        lcc = snap.ConvertGraph(snap.PUNGraph, lcc, True)
-        
+def get_anf_statistics(lcc, k=32, r=0, h_max=20):
     nodes_n = lcc.GetNodes() # node size
     edges_n = lcc.GetEdges() # edge size
     
