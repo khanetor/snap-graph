@@ -10,7 +10,7 @@ import snap
 import numpy as np
 
 
-def get_sample_source_statistics(lcc, pct):
+def get_sample_source_statistics(lcc, p):
     if isinstance(lcc, snap.PNGraph):
         is_directed = True
     elif isinstance(lcc, snap.PUNGraph):
@@ -20,16 +20,13 @@ def get_sample_source_statistics(lcc, pct):
 
     nodes = lcc.GetNodes()
     edges = lcc.GetEdges()
-    
-    # convert percentage to [0, 1)
-    pct = float(pct) /100
 
     # Find mean, median, diameter, effective diameter
     distance_counter = snap.TIntH()
 
     for n in lcc.Nodes():
         ran_num = np.random.random()
-        if ran_num < pct:
+        if ran_num < p:
             n_id = n.GetId()
             shortest_distances = snap.TIntH()
             snap.GetShortPath(lcc, n_id, shortest_distances, is_directed)

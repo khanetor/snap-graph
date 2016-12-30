@@ -1,14 +1,14 @@
 from __future__ import division
 import snap
 from exception import NotAGraphError, NotValidParameter
-from random import randint
+import numpy as np
 
 
 # Sample random pairs
 
 def get_sample_pair_statistics(lcc, p):
-    if not 1 <= p <= 100:
-        raise NotValidParameter('n should be between 1 and 100')
+    if not 0<=p<=1:
+        raise NotValidParameter('p should be between 0 and 1')
     elif isinstance(lcc, snap.PNGraph):
         is_directed = True
     elif isinstance(lcc, snap.PUNGraph):
@@ -25,7 +25,7 @@ def get_sample_pair_statistics(lcc, p):
 
     for n in lcc.Nodes():
         for m in lcc.Nodes():
-            if randint(0, 100) > p:  # a pair of nodes have p percent chance to be chosen
+            if np.random.random() > p:  # a pair of nodes have p percent chance to be chosen
                 continue
             else:
                 cc += 1
