@@ -2,15 +2,13 @@ from __future__ import division
 import snap
 
 
-def statistics(graph):
-    if isinstance(graph, snap.PNGraph):
+def statistics(lcc):
+    if isinstance(lcc, snap.PNGraph):
         is_directed = True
-        lcc = snap.GetMxScc(graph)
-    elif isinstance(graph, snap.PUNGraph):
+    elif isinstance(lcc, snap.PUNGraph):
         is_directed = False
-        lcc = snap.GetMxWcc(graph)
     else:
-        raise NotAGraphError(graph)
+        raise NotAGraphError(lcc)
 
     nodes = lcc.GetNodes()
     edges = lcc.GetEdges()
