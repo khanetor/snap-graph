@@ -20,6 +20,9 @@ def get_sample_source_statistics(lcc, pct):
 
     nodes = lcc.GetNodes()
     edges = lcc.GetEdges()
+    
+    # convert percentage to [0, 1)
+    pct = float(pct) /100
 
     # Find mean, median, diameter, effective diameter
     distance_counter = snap.TIntH()
