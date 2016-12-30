@@ -10,15 +10,13 @@ import snap
 import numpy as np
 
 
-def sample_source_stats(graph, pct):
-    if isinstance(graph, snap.PNGraph):
+def sample_source_stats(lcc, pct):
+    if isinstance(lcc, snap.PNGraph):
         is_directed = True
-        lcc = snap.GetMxScc(graph)
-    elif isinstance(graph, snap.PUNGraph):
+    elif isinstance(lcc, snap.PUNGraph):
         is_directed = False
-        lcc = snap.GetMxWcc(graph)
     else:
-        raise NotAGraphError(graph)
+        raise NotAGraphError(lcc)
 
     nodes = lcc.GetNodes()
     edges = lcc.GetEdges()
