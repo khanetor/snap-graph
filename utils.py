@@ -34,8 +34,12 @@ def convert_undirected(G1):
 def get_connected_component(graph):
     if isinstance(graph, snap.PNGraph):
         lcc = snap.GetMxScc(graph)
+        # renumber the node numbers from 0 to the size-1
+        lcc = snap.ConvertGraph(snap.PNGraph, lcc, True)
     elif isinstance(graph, snap.PUNGraph):
         lcc = snap.GetMxWcc(graph)
+        # renumber the node numbers from 0 to the size-1
+        lcc = snap.ConvertGraph(snap.PUNGraph, lcc, True)
     else:
         raise NotAGraphError(graph)
     return lcc
