@@ -25,7 +25,7 @@ parser.add_argument(
     default=0, 
     help='''Method to compute statistics. 
     0: exact (default), 
-    1: sample pairs, 
+    1: sample pair, 
     2: sample source, 
     3: anf''')
 parser.add_argument('-p', default=10, help='Percentage for sampling (default=10%)')
@@ -63,7 +63,7 @@ if is_directed: type_suffix = 'directed'
 method_suffix = 'exact'
 params = 'none'
 if method==1:
-    method_suffix = 'pairs'
+    method_suffix = 'pair'
     params = 'p'+str(p)
 elif method==2:
     method_suffix = 'src'
