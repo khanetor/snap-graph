@@ -17,7 +17,10 @@ def load_graph(filename, prefix, directed=True):
     # check whether the file exists and is a text
     assert os.path.isfile(filepath)==True and fileext=='.txt'
     # load the graph from file, the last two params representing src and dest columns
-    G = snap.LoadEdgeList(snap.PNGraph, filepath, 0, 1)
+    if directed:
+        G = snap.LoadEdgeList(snap.PNGraph, filepath, 0, 1)
+    else:
+        G = snap.LoadEdgeList(snap.PUNGraph, filepath, 0, 1)
     return G
 
 
@@ -25,10 +28,25 @@ def load_graph(filename, prefix, directed=True):
 def convert_undirected(G1):
     G2 = snap.ConvertGraph(snap.PUNGraph, G1)
     return G2
+    
+
+# get the largest connected component
+def get_connected_component(graph):
+    if isinstance(graph, snap.PNGraph):
+        lcc = snap.GetMxScc(graph)
+    elif isinstance(graph, snap.PUNGraph):
+        lcc = snap.GetMxWcc(graph)
+    else:
+        raise NotAGraphError(graph)
+    return lcc
+    
+
+class NotAGraphError(Exception):
+    pass
 
 
 # save the result to file
-def save_statistics(filename, prefix, med_dist, mean_dist, diam, eff_diam, comp_time):
+def save_statistics(filename, prefix, nodes, edges, med_dist, mean_dist, diam, eff_diam, comp_time):
     # get the path to the file
     filepath = os.path.join(prefix, filename)
     filen, fileext = os.path.splitext(filepath)
@@ -36,4 +54,4 @@ def save_statistics(filename, prefix, med_dist, mean_dist, diam, eff_diam, comp_
     if not os.path.exists(prefix):
         os.makedirs(prefix)
     with open(filepath, 'w') as f:
-        f.write('{} {} {} {} {}'.format(med_dist, mean_dist, diam, eff_diam, comp_time))
+        f.write('{} {} {} {} {} {} {}'.format(nodes, edges, med_dist, mean_dist, diam, eff_diam, comp_time))
