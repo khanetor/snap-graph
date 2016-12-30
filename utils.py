@@ -6,6 +6,7 @@ Created on Sun Dec  4 11:56:35 2016
 """
 import snap
 import os
+from exception import NotAGraphError
 
 # load the graph from text files
 # directed: indicates the graph is directed or not
@@ -43,10 +44,6 @@ def get_connected_component(graph):
     else:
         raise NotAGraphError(graph)
     return lcc
-    
-
-class NotAGraphError(Exception):
-    pass
 
 
 # save the result to file
