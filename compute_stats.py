@@ -8,7 +8,7 @@ Created on Sun Dec  4 12:23:40 2016
 from utils import load_graph, save_statistics, get_connected_component
 import os
 import argparse
-from question1 import statistics
+from exact import get_exact_statistics
 from anf import get_anf_statistics
 from sample_source import get_sample_source_statistics
 import time
@@ -90,7 +90,7 @@ for filename in data:
     print 'compute the statistics...'
     time0 = time.clock()
     if method == 0: # exact statistics
-        nodes, edges, mean, median, diameter, eff_diameter = statistics(lcc)
+        nodes, edges, mean, median, diameter, eff_diameter = get_exact_statistics(lcc)
     elif method == 2: # sample source
         nodes, edges, mean, median, diameter, eff_diameter = get_sample_source_statistics(lcc,pct=p)
     elif method == 3: # anf algorithm
