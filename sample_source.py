@@ -10,7 +10,7 @@ import snap
 import numpy as np
 
 
-def sample_source_stats(lcc, pct):
+def get_sample_source_statistics(lcc, pct):
     if isinstance(lcc, snap.PNGraph):
         is_directed = True
     elif isinstance(lcc, snap.PUNGraph):
