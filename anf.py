@@ -109,6 +109,7 @@ def get_anf_statistics(graph, k=32, r=0, h_max=20):
         lcc = snap.ConvertGraph(snap.PUNGraph, lcc, True)
         
     nodes_n = lcc.GetNodes() # node size
+    edges_n = lcc.GetEdges() # edge size
     
     # the maximum number of digit of binary numbers for Flajolet-Martin algorithm
     d = int(np.ceil(np.log2(nodes_n)))+r 
@@ -146,4 +147,4 @@ def get_anf_statistics(graph, k=32, r=0, h_max=20):
     
     mean, median, diameter, eff_diameter = get_statistics(min_dist_count)
     
-    return mean, median, diameter, eff_diameter
+    return nodes_n, edges_n, mean, median, diameter, eff_diameter
