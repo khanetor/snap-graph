@@ -11,6 +11,7 @@ import argparse
 from exact import get_exact_statistics
 from anf import get_anf_statistics
 from sample_source import get_sample_source_statistics
+from sample_pair import get_sample_pair_statistics
 import time
 
 
@@ -91,6 +92,8 @@ for filename in data:
     time0 = time.clock()
     if method == 0: # exact statistics
         nodes, edges, mean, median, diameter, eff_diameter = get_exact_statistics(lcc)
+    elif method == 1: # sample pair
+        nodes, edges, mean, median, diameter, eff_diameter = get_sample_pair_statistics(lcc,p=p)
     elif method == 2: # sample source
         nodes, edges, mean, median, diameter, eff_diameter = get_sample_source_statistics(lcc,pct=p)
     elif method == 3: # anf algorithm
