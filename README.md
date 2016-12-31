@@ -1,7 +1,7 @@
 Snap Graphs
 ===========
 
-# Installation
+### Installation
 1. Use Python 2.7!
 2. Download the graphs from [here](http://snap.stanford.edu/data/index.html).
 3. Download ```SNAP.py``` from [here](http://snap.stanford.edu/snappy/release).
@@ -14,7 +14,7 @@ Snap Graphs
 	 ```
    * Or you can simply copy ```_snap.so``` and ```snap.py``` to your project directory
 
-# Quickstart
+### Quickstart
 
 The main script to perform statistics computation is ```computer_stats.py```. The script automatically finding the largest strongly connected component if the graph is directed and the largest weakly connected component of the graph is undirected. The methods are performed on this component.
 
@@ -46,7 +46,7 @@ To see the list of options, you can run
 python2 compute_stats.py --help
 ```
 
-# Graph Statistics computations
+### Graph Statistics computations
 
 We implemented 4 methods to compute the graph statistics:
 
@@ -56,7 +56,7 @@ We implemented 4 methods to compute the graph statistics:
 4. ANF algorithm (a scheme of Flajolet-Marting algorithm): Located in ```anf.py```. Calling method: ```get_anf_statistics(lcc, k, r, h_max)```
 
 
-# Graphs to examine
+### Graphs to examine
 - wiki-Vote : 7,115 nodes
 - soc-Epinions1 : 75,879 nodes
 - ego-Gplus : 107,614
