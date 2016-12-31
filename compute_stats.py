@@ -36,6 +36,8 @@ parser.add_argument('-k', default=32,
                     ''')
 parser.add_argument('-r', default=0, 
                     help='Extra bit for ANF algorithm (default=0)')
+parser.add_argument('-hm', default=20,
+                    help='The distance limit (exclusive) to check for ANF algorithm (default=20)')
 args = parser.parse_args()
 
 data_dir = args.d
@@ -56,6 +58,7 @@ method = int(args.m)
 p = float(args.p)
 k = int(args.k)
 r = int(args.r)
+hm = int(args.hm)
 
 # %% suffixes for saving files
 type_suffix = 'undirected'
@@ -71,7 +74,7 @@ elif method==2:
     params = 'p'+str(p)
 elif method==3:
     method_suffix = 'anf'
-    params = 'k'+str(k)+'-r'+str(r)
+    params = 'k'+str(k)+'-r'+str(r)+'-hm'+str(hm)
 
 
 # %% load the data as directed graphs and compute the statistics
@@ -97,7 +100,7 @@ for filename in data:
     elif method == 2: # sample source
         nodes, edges, mean, median, diameter, eff_diameter = get_sample_source_statistics(lcc,p=p)
     elif method == 3: # anf algorithm
-        nodes, edges, mean, median, diameter, eff_diameter = get_anf_statistics(lcc,k=k,r=r)
+        nodes, edges, mean, median, diameter, eff_diameter = get_anf_statistics(lcc,k=k,r=r,h_max=hm)
     comp_time = time.clock()-time0
     
     # save the results
