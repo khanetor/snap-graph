@@ -95,7 +95,7 @@ for filename in data:
     elif method == 1: # sample pair
         nodes, edges, mean, median, diameter, eff_diameter = get_sample_pair_statistics(lcc,p=p)
     elif method == 2: # sample source
-        nodes, edges, mean, median, diameter, eff_diameter = get_sample_source_statistics(lcc,pct=p)
+        nodes, edges, mean, median, diameter, eff_diameter = get_sample_source_statistics(lcc,p=p)
     elif method == 3: # anf algorithm
         nodes, edges, mean, median, diameter, eff_diameter = get_anf_statistics(lcc,k=k,r=r)
     comp_time = time.clock()-time0
