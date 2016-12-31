@@ -29,7 +29,7 @@ parser.add_argument(
     1: sample pair, 
     2: sample source, 
     3: anf''')
-parser.add_argument('-p', default=.1, help='Probability for sampling (default=.1%)')
+parser.add_argument('-p', default=.1, help='Probability for sampling (default=.1)')
 parser.add_argument('-k', default=32, 
                     help='''
                     Number of binary numbers for each node in ANF algorihtm
