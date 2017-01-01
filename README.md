@@ -16,7 +16,7 @@ Snap Graphs
 
 ### Quickstart
 
-The main script to perform statistics computation is ```computer_stats.py```. The script automatically finding the largest strongly connected component if the graph is directed and the largest weakly connected component of the graph is undirected. The methods are performed on this component.
+The main script to perform statistics computation is ```compute_stats.py```. The script automatically finding the largest strongly connected component if the graph is directed and the largest weakly connected component of the graph is undirected. The methods are performed on this component.
 
 For example, to compute the approximate statistics of the graph wiki-Vote.txt
 * which is located in ../data/ 
@@ -27,7 +27,7 @@ For example, to compute the approximate statistics of the graph wiki-Vote.txt
 * converting the graph into an undirected graph before computing
 
 ```python
-python2 compute_stats.py -d ../data -s ../results -f wiki-Vote.txt -3 -k 16 -r 3 -u
+python2 compute_stats.py -d ../data -s ../results -f wiki-Vote.txt -m 3 -k 16 -r 3 -u
 ```
 
 Some main options:
@@ -53,7 +53,7 @@ We implemented 4 methods to compute the graph statistics:
 1. Exact statistics: Located in ```exact.py```. Calling method: ```get_exact_statistics(lcc)```
 2. Sampling random pairs of nodes: Located in ```sample_pair.py```. Calling method: ```get_sample_pair_statistics(lcc, p)```
 3. Sampling random sources and performing BFS: Located in ```sample_source.py```. Calling method: ```get_sample_source_statistics(lcc, p)```
-4. ANF algorithm (a scheme of Flajolet-Marting algorithm): Located in ```anf.py```. Calling method: ```get_anf_statistics(lcc, k, r, h_max)```
+4. ANF algorithm (a scheme of Flajolet-Martin algorithm): Located in ```anf.py```. Calling method: ```get_anf_statistics(lcc, k, r, h_max)```
 
 
 ### Graphs to examine
